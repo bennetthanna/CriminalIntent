@@ -32,6 +32,7 @@ public class CrimeFragment extends Fragment {
     private static final String DIALOG_TIME = "DialogTime";
 
     private static final int REQUEST_DATE = 0;
+    private static final int REQUEST_TIME = 1;
 
     private Crime mCrime;
     private EditText mTitleField;
@@ -91,13 +92,13 @@ public class CrimeFragment extends Fragment {
         });
 
         mTimeButton = (Button) v.findViewById(R.id.crime_time);
-        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
-        mTimeButton.setText(timeFormat.format(mCrime.getDate()));
+        updateTime();
         mTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager manager = getFragmentManager();
                 TimePickerFragment timeDialog = new TimePickerFragment().newInstance(mCrime.getDate());
+                timeDialog.setTargetFragment(CrimeFragment.this, REQUEST_TIME);
                 timeDialog.show(manager, DIALOG_TIME);
             }
         });
@@ -124,11 +125,24 @@ public class CrimeFragment extends Fragment {
             Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             mCrime.setDate(date);
             updateDate();
+            updateTime();
+        }
+
+        if (requestCode == REQUEST_TIME) {
+            Date date = (Date) data.getSerializableExtra(TimePickerFragment.EXTRA_TIME);
+            mCrime.setDate(date);
+            updateTime();
+            updateDate();
         }
     }
 
     private void updateDate() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd");
         mDateButton.setText(dateFormat.format(mCrime.getDate()));
+    }
+
+    private void updateTime() {
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+        mTimeButton.setText(timeFormat.format(mCrime.getDate()));
     }
 }

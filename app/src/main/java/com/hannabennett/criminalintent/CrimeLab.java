@@ -107,4 +107,8 @@ public class CrimeLab {
 
         return values;
     }
+
+    public void deleteCrime(Crime c) {
+        mCrimes.remove(c);
+    }
 }

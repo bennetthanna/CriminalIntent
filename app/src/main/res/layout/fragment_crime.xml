@@ -23,7 +23,7 @@
                 android:layout_height="80dp"
                 android:scaleType="centerInside"
                 android:cropToPadding="true"
-                android:backgroud="@android:color/darker_gray"
+                android:background="@android:color/darker_gray"
                 />
 
             <ImageButton

@@ -186,7 +186,7 @@ public class CrimeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentManager manager = getFragmentManager();
-                DetailDisplayFragment dialog = new DetailDisplayFragment();
+                DetailDisplayFragment dialog = DetailDisplayFragment.newInstance(mPhotoFile.getPath());
                 dialog.show(manager, DIALOG_PHOTO);
             }
         });
